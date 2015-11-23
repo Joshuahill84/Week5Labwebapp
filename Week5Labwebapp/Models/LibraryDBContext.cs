@@ -25,8 +25,11 @@ namespace Week5Labwebapp.Models
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public virtual DbSet<Student> Students { get; set; }
 
+        //////public System.Data.Entity.DbSet<Week5Labwebapp.Models.Book> Books { get; set; }
+        public virtual DbSet<Book> Books { get; set; }
 
-       
+        ///////public System.Data.Entity.DbSet<Week5Labwebapp.Models.Checkout> Checkouts { get; set; }
+        public DbSet<Checkout> Checkouts { get; set; }
     }
     public class Student
     {
