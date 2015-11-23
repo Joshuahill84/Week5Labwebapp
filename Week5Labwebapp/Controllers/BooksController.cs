@@ -16,6 +16,32 @@ namespace Week5Labwebapp.Controllers
     {
         private LibraryDBContext db = new LibraryDBContext();
 
+        [Route("api/books/checkin/{bookid}")]
+        [HttpPost]
+        public IHttpActionResult CheckInBook(int BookId)
+        {
+            //what does checking in a book mean?
+            // fill out column checkindate based on datetime.now
+          
+
+            Book book = db.Books.Find(BookId);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            var alreadycheckoutrow = book.checkouts.FirstOrDefault(x => x.ReturnDate == null);
+
+            if (alreadycheckoutrow == null)
+            {
+                return BadRequest("book is now checked in");
+            }
+            alreadycheckoutrow.ReturnDate = DateTime.Now;
+            db.SaveChanges();
+            return Ok(alreadycheckoutrow);
+           
+        }
+
         [Route("api/books/checkout")]
         public IHttpActionResult CheckOutABook(CheckOutInfo info )
         {
@@ -29,6 +55,13 @@ namespace Week5Labwebapp.Controllers
             if (student == null)
             {
                 return NotFound();
+            }
+           // var hasacheckout = db.Checkouts.Where(x => x.Book == book && x.ReturnDate != null);
+            var isalreadycheckout = book.checkouts.Any(x => x.ReturnDate == null);
+
+            if (isalreadycheckout)
+            {
+                return BadRequest("book is checked out");
             }
 
             Checkout cob = new Checkout();

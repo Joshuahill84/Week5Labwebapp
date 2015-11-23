@@ -54,8 +54,8 @@ namespace Week5Labwebapp.Models
     public class Checkout
     {
         public int Id { get; set; }
-        public Book Book { get; set; }
-        public Student Student { get; set; }
+        public virtual Book Book { get; set; }
+        public virtual Student Student { get; set; }
         public DateTime CheckoutDate { get; set; }
         public DateTime? ReturnDate { get; set; }
         public DateTime? DueDate { get; set; }
