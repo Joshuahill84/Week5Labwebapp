@@ -16,6 +16,36 @@ namespace Week5Labwebapp.Controllers
     {
         private LibraryDBContext db = new LibraryDBContext();
 
+        [Route("api/books/checkout")]
+        public IHttpActionResult CheckOutABook(CheckOutInfo info )
+        {
+            Book book = db.Books.Find(info.BookId);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            Student student = db.Students.Find(info.StudentId);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            Checkout cob = new Checkout();
+
+            cob.Book = book;
+            cob.Student = student;
+            cob.CheckoutDate = DateTime.Now;
+            cob.DueDate = cob.CheckoutDate.AddMonths(1);
+
+            db.Checkouts.Add(cob);
+            db.SaveChanges();
+
+            var result = new { CheckedOut = cob.CheckoutDate.ToShortDateString(), DueBackOn = cob.DueDate.Value.ToShortDateString(), Book = cob.Book.Title, Student= cob.Student.Name };
+            return Ok(result);
+
+        }
+
         // GET: api/Books
         public IQueryable<Book> GetBooks()
         {

@@ -99,6 +99,11 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Migrations\201511231957516_CheckOutDatesFix.cs" />
+    <Compile Include="Migrations\201511231957516_CheckOutDatesFix.Designer.cs">
+      <DependentUpon>201511231957516_CheckOutDatesFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckOutInfo.cs" />
     <Compile Include="Controllers\CheckoutsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -127,6 +132,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511202203504_initialcreate.resx">
       <DependentUpon>201511202203504_initialcreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511231957516_CheckOutDatesFix.resx">
+      <DependentUpon>201511231957516_CheckOutDatesFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
